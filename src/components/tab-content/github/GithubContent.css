@@ -1,0 +1,30 @@
+.options {
+    width: 100%;
+    height: max-content;
+}
+
+.item {
+    background-color: gray;
+    margin: 1em 1em 1em -1em;
+    padding: 1.3em;
+    font-size: 1.15em;
+    border-radius: 1em;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+
+.content {
+    width: 80%;
+    height: max-content;
+    background-color:rgb(187, 187, 187);
+    margin: 0.5em;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.content a {
+    text-decoration: underline;
+    color: black;
+    font-weight: bold;
+}
