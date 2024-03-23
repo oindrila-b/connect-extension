@@ -6,38 +6,6 @@ import Nango from '@nangohq/frontend'
 import GithubTabContent from './GithubTabContent'
 
 const GithubContent = (nango : {nango: Nango}) => {
-
- 
-  const githubId = 'github-2'
-  const githubConnection = 'test_ob'
-  const jiraId='jira-1'
-  const jiraConnection='test-connection-id'
-
-  const handleGithubLogIn = () => {
-    nango.nango
-      .auth(githubId, githubConnection)
-      .then((result) => {
-        console.log(result)
-      })
-      .catch((error) => {
-          // Handle failure.
-          console.log("Failed to Login")
-          alert("Failed to Login")
-      });
-    
-  }
-  const handleJiraLogIn = () => {
-    nango.nango
-    .auth(jiraId, jiraConnection)
-    .then((result) => {
-      console.log(result)
-    })
-    .catch((error) => {
-        // Handle failure.
-        console.log("Failed to Login")
-        alert("Failed to Login")
-    });
-  }
   
 
   const baseURL = 'http://127.0.0.1:5000/list/github'

@@ -9,10 +9,46 @@ const Tabs = () => {
 
 
   const publicKey = '29db32df-f083-48b3-b3d6-f01945876492'
+   
+  const githubId = 'github-2'
+  const githubConnection = 'test_ob'
+  const jiraId='jira-1'
+  const jiraConnection='test-connection-id'
+
   let nango: Nango = new Nango({publicKey: publicKey});
+
+  const handleGithubLogIn = async() => {
+    await nango
+      .auth(githubId, githubConnection)
+      .then((result) => {
+        console.log(result)
+      })
+      .catch((error) => {
+          // Handle failure.
+          console.log("Failed to Login")
+          alert("Failed to Login")
+      });
+    
+  }
+
+  const handleJiraLogIn = async() => {
+    await nango
+    .auth(jiraId, jiraConnection)
+    .then((result) => {
+      console.log(result)
+    })
+    .catch((error) => {
+        // Handle failure.
+        console.log("Failed to Login")
+        alert("Failed to Login")
+    });
+  }
 
   useEffect(() => {
     nango = new Nango({ publicKey: publicKey })
+    console.log("done")
+    // handleGithubLogIn()
+    // handleJiraLogIn()
   })
   
 
