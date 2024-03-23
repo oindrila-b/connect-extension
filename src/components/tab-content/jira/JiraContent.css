@@ -3,13 +3,14 @@
     display: flex;
     flex-direction: column;
 }
-
-.g-entities {
+.bloc-tabs {
     display: flex;
     justify-content: space-around;
+    
 }
 
-.g-entity {
+
+.j-entity {
     padding: 1em;
     text-align: center;
     background-color: rgba(63, 63, 63, 0.144);
@@ -18,14 +19,12 @@
     border-radius: 2em;
 }
 
-.repo, .starred {
-    background-color: rgb(116, 116, 116);
+.issue, .projects {
+    background-color: rgb(32, 95, 255);
     color:white ;
 }
 
-.entity-content {
-    margin-left: 5em;
-}
+
 
 
 .content {
@@ -35,11 +34,4 @@
     margin: 0.8em;
     padding: 1em;
     border-radius: 1em;
-    text-align: center;
-}
-
-
-
-.loading {
-padding: 2em;
 }

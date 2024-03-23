@@ -57,3 +57,9 @@ h1 {
     color: black;
     width: 100%;
 }
+
+a {
+    text-decoration: underline;
+    color: black;
+    font-weight: bold;
+}

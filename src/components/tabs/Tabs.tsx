@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Tabs.css'
 import GithubContent from '../tab-content/github/GithubContent'
+import JiraContent from '../tab-content/jira/JiraContent'
 
 const Tabs = () => {
 
@@ -22,7 +23,7 @@ const handleActive = (index: number) => {
             <GithubContent />
           </div> : null}
           {active === 2 ? <div className="jira-content">
-          <h1> HELLO JIRA </h1>
+          <JiraContent />
           </div>:null}
         </div>
       </div>
