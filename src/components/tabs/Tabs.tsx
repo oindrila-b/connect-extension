@@ -9,9 +9,8 @@ const Tabs = () => {
 
 const [active, setActive] =  useState(1)
 
-const hasGithubData: boolean = false;
-const [gloggedIn, isGithubLoggedIn] = useState(true)
-const [jLoggedIn, isJiraLoggedIn] = useState(true)
+const [gloggedIn, isGithubLoggedIn] = useState(false)
+const [jLoggedIn, isJiraLoggedIn] = useState(false)
 
 
 let nango: Nango;
