@@ -1,68 +1,86 @@
-
 let request: IDBOpenDBRequest;
 let db: IDBDatabase;
 let version = 1;
+const indexedDB = window.indexedDB;
 
-
-export enum Storages {
-    Integration = 'integration',
-    GithubRepositories = 'github-repositories',
-    GithubStarredRepositories = 'github-starred-repositories',
-    JiraIssues = 'jira-issues',
-    JiraProjects = 'jira-projects',
+export enum Stores {
+  Integration = 'integrations',
+  GithubRepositories = 'github-repo',
+  GithubStarred = 'github-starred',
+  JiraIssue = 'jira-issue',
+  JiraProject = 'jira-project',
 }
 
 export const initDB = (): Promise<boolean> => {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve) => {
     // open the connection
     request = indexedDB.open('Integrations');
 
-    request.onupgradeneeded = () => {
-      db = request.result;
+    request.onupgradeneeded = (event) => {
+      db =  (event.target as IDBOpenDBRequest).result;
 
       // if the data object store doesn't exist, create it
-      if (!db.objectStoreNames.contains(Storages.Integration)) {
-        console.log('Creating integration store');
-        db.createObjectStore(Storages.Integration, { keyPath: 'id' });
+      if (!db.objectStoreNames.contains(Stores.Integration)) {
+        console.log('Creating users store');
+        db.createObjectStore(Stores.Integration, { keyPath: 'id', autoIncrement: true });
       }
 
-      if (!db.objectStoreNames.contains(Storages.GithubRepositories)) {
+      if (!db.objectStoreNames.contains(Stores.GithubRepositories)) {
         console.log('Creating GithubRepositories store');
-        db.createObjectStore(Storages.GithubRepositories, { keyPath: 'id' });
+        db.createObjectStore(Stores.GithubRepositories, { keyPath: 'id', autoIncrement: true });
       }
 
-      if (!db.objectStoreNames.contains(Storages.GithubStarredRepositories)) {
-        console.log('Creating GithubStarredRepositories store');
-        db.createObjectStore(Storages.GithubStarredRepositories, { keyPath: 'id' });
+      if (!db.objectStoreNames.contains(Stores.GithubStarred)) {
+        console.log('Creating GithubStarred store');
+        db.createObjectStore(Stores.GithubStarred, { keyPath: 'id', autoIncrement: true });
       }
 
-      if (!db.objectStoreNames.contains(Storages.JiraIssues)) {
-        console.log('Creating JiraIssues store');
-        db.createObjectStore(Storages.JiraIssues, { keyPath: 'id' });
+      if (!db.objectStoreNames.contains(Stores.JiraIssue)) {
+        console.log('Creating JiraIssue store');
+        db.createObjectStore(Stores.JiraIssue, { keyPath: 'id', autoIncrement: true });
       }
 
-      if (!db.objectStoreNames.contains(Storages.JiraProjects)) {
-        console.log('Creating JiraProjects store');
-        db.createObjectStore(Storages.JiraProjects, { keyPath: 'id' });
+      if (!db.objectStoreNames.contains(Stores.JiraProject)) {
+        console.log('Creating JiraProject store');
+        db.createObjectStore(Stores.JiraProject, { keyPath: 'id', autoIncrement: true });
       }
-
       // no need to resolve here
     };
 
-    request.onsuccess = () => {
-      try{
-        db = request.result;
-        version = db.version;
-        console.log('request.onsuccess - initDB', version);
-        resolve(true);
-      }catch(err){
-       console.log("An error occurred: " + err)
-      }
-     
+    request.onsuccess = (event) => {
+      db = (event.target as IDBOpenDBRequest).result;
+      version = db.version;
+      console.log('request.onsuccess - initDB', version);
+      resolve(true);
     };
 
     request.onerror = () => {
       resolve(false);
+    };
+  });
+};
+
+
+export const addData = <T>(storeName: string, data: T): Promise<T|string|null> => {
+  return new Promise((resolve) => {
+    request = indexedDB.open('Integrations', version);
+
+    request.onsuccess = (event) => {
+      console.log('request.onsuccess - addData', data);
+      db = (event.target as IDBOpenDBRequest).result;
+      const tx = db.transaction(storeName, 'readwrite');
+      const store = tx.objectStore(storeName);
+      store.add(data);
+      resolve(data);
+    };
+
+    request.onerror = () => {
+      const error = request.error?.message
+      if (error) {
+        resolve(error);
+      } else {
+        resolve('Unknown error');
+      }
     };
   });
 };

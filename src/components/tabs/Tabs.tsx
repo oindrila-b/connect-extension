@@ -8,8 +8,10 @@ import Nango from '@nangohq/frontend'
 const Tabs = () => {
 
 const [active, setActive] =  useState(1)
-const [gloggedIn, isGithubLoggedIn] = useState(false)
-const [jLoggedIn, isJiraLoggedIn] = useState(false)
+
+const hasGithubData: boolean = false;
+const [gloggedIn, isGithubLoggedIn] = useState(true)
+const [jLoggedIn, isJiraLoggedIn] = useState(true)
 
 
 let nango: Nango;
@@ -26,6 +28,7 @@ useEffect(() => {
 
 const handleActive = (index: number) => {
   setActive(index)
+  
 }
 
 const handleGithubLogIn = () => {
