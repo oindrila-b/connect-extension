@@ -63,3 +63,26 @@ a {
     color: black;
     font-weight: bold;
 }
+
+
+.login-button {
+    width: 100%;
+    height: 100%;
+    margin: 1em ;
+    border-radius: 1em;
+    color: white;
+    justify-content: center;
+    display: flex;
+}
+
+.github-lg {
+    padding: 1em;
+    border-radius: 1em;
+    background-color: rgb(75, 150, 81);
+}
+
+.jira-lg {
+    padding: 1em;
+    border-radius: 1em;
+    background-color:rgb(32, 95, 255);
+}

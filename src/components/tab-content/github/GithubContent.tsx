@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './GithubContent.css'
-import { GithubContentItem } from '../asset/GithubContentItem'
-import { GithubRepo } from '../GithubRepoModel'
+import { GithubContentItem } from '../asset/github-content/GithubContentItem'
+import { GithubRepo } from '../asset/models/GithubRepoModel'
 
 const GithubContent = () => {
 
@@ -46,7 +46,7 @@ const handleActive = (index: number) => {
         {active === 1 ? <div className="repo-content">
             {githubRepositories.length !== 0 ? 
             <div>
-              {githubRepositories.map(repo => (<GithubContentItem key={repo._id} name={repo._name} url={repo._url} />))}
+              {githubRepositories.map(repo => (<GithubContentItem key={repo._id} _name={repo._name} _url={repo._url} _id={repo._id} />))}
             </div>
             : 
             <div className='loading'>LOADING DATA.....</div>
@@ -55,7 +55,7 @@ const handleActive = (index: number) => {
           {active === 2 ? <div className="starred-content">
             {githubStarred.length !== 0 ? 
             <div>
-              {githubStarred.map(repo => (<GithubContentItem key={repo._id} name={repo._name} url={repo._url} owner={repo._owner} />))}
+              {githubStarred.map(repo => (<GithubContentItem key={repo._id} _name={repo._name} _url={repo._url} _owner={repo._owner} _id={repo._id} />))}
             </div>
             : 
             <div className='loading'>LOADING DATA.....</div>}
