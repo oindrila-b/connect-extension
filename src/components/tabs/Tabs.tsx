@@ -7,55 +7,22 @@ import Nango from '@nangohq/frontend'
 
 const Tabs = () => {
 
+
+  const publicKey = '29db32df-f083-48b3-b3d6-f01945876492'
+  let nango: Nango = new Nango({publicKey: publicKey});
+
+  useEffect(() => {
+    nango = new Nango({ publicKey: publicKey })
+  })
+  
+
+
 const [active, setActive] =  useState(1)
 
-const [gloggedIn, isGithubLoggedIn] = useState(false)
-const [jLoggedIn, isJiraLoggedIn] = useState(false)
-
-
-let nango: Nango;
-const publicKey = '29db32df-f083-48b3-b3d6-f01945876492'
-const githubId = 'github-2'
-const githubConnection = 'test_ob'
-const jiraId='jira-1'
-const jiraConnection='test-connection-id'
-
-
-useEffect(() => {
-  nango = new Nango({ publicKey: publicKey })
-})
 
 const handleActive = (index: number) => {
   setActive(index)
   
-}
-
-const handleGithubLogIn = () => {
-  nango
-    .auth(githubId, githubConnection)
-    .then((result) => {
-      console.log(result)
-      isGithubLoggedIn(true)
-    })
-    .catch((error) => {
-        // Handle failure.
-        console.log("Failed to Login")
-        alert("Failed to Login")
-    });
-  
-}
-const handleJiraLogIn = () => {
-  nango
-  .auth(jiraId, jiraConnection)
-  .then((result) => {
-    console.log(result)
-    isJiraLoggedIn(true)
-  })
-  .catch((error) => {
-      // Handle failure.
-      console.log("Failed to Login")
-      alert("Failed to Login")
-  });
 }
 
   return (
@@ -69,13 +36,7 @@ const handleJiraLogIn = () => {
           {
           active === 1? 
           <div className="github-content">
-           {gloggedIn ? 
-                <>  <GithubContent /> </> :  
-                <div className='login-button'>
-                     <button onClick={handleGithubLogIn} className='github-lg' > 
-                        Login to Github 
-                     </button>
-                </div>}
+          <GithubContent nango={nango} />
           </div> 
           :          
           null
@@ -84,16 +45,7 @@ const handleJiraLogIn = () => {
           {
           active === 2 ? 
             <div className="jira-content">
-                {
-                  jLoggedIn ? 
-                    <> <JiraContent /> </>
-                    :
-                    <div className='login-button'>
-                      <button onClick={handleJiraLogIn} className='jira-lg'>
-                          Login to Jira   
-                      </button>
-                    </div>
-                }
+               <JiraContent /> 
            </div>
            : 
            null
