@@ -48,10 +48,10 @@ const handleActive = (index: number) => {
             {githubRepositories.length !== 0 ? 
             <div>
               {githubRepositories.map(repo => {
-                const id = repo._id;
-                const name = repo._name;
-                const url = repo._url;
-                addData(Stores.GithubRepositories, {name, url, id})
+                // const id = repo._id;
+                // const name = repo._name;
+                // const url = repo._url;
+                // addData(Stores.GithubRepositories, {name, url, id})
               return <GithubContentItem key={repo._id} _name={repo._name} _url={repo._url} _id={repo._id} />
               })}
             </div>
@@ -63,11 +63,11 @@ const handleActive = (index: number) => {
             {githubStarred.length !== 0 ? 
             <div>
               {githubStarred.map(repo => {
-                 const id = repo._id;
-                 const name = repo._name;
-                 const url = repo._url;
-                 const owner = repo._owner;
-                 addData(Stores.GithubStarred, {name, owner, url, id})
+                //  const id = repo._id;
+                //  const name = repo._name;
+                //  const url = repo._url;
+                //  const owner = repo._owner;
+                //  addData(Stores.GithubStarred, {name, owner, url, id})
                return <GithubContentItem key={repo._id} _name={repo._name} _url={repo._url} _owner={repo._owner} _id={repo._id} />
               }
               )}

@@ -4,7 +4,7 @@ let version = 1;
 const indexedDB = window.indexedDB;
 
 export enum Stores {
-  Integration = 'integrations',
+  Integration = 'integration',
   GithubRepositories = 'github-repo',
   GithubStarred = 'github-starred',
   JiraIssue = 'jira-issue',
@@ -21,7 +21,7 @@ export const initDB = (): Promise<boolean> => {
 
       // if the data object store doesn't exist, create it
       if (!db.objectStoreNames.contains(Stores.Integration)) {
-        console.log('Creating users store');
+        console.log('Creating Integrations store');
         db.createObjectStore(Stores.Integration, { keyPath: 'id', autoIncrement: true });
       }
 
@@ -68,6 +68,7 @@ export const addData = <T>(storeName: string, data: T): Promise<T|string|null> =
     request.onsuccess = (event) => {
       console.log('request.onsuccess - addData', data);
       db = (event.target as IDBOpenDBRequest).result;
+      console.log(storeName)
       const tx = db.transaction(storeName, 'readwrite');
       const store = tx.objectStore(storeName);
       store.add(data);
@@ -80,6 +81,27 @@ export const addData = <T>(storeName: string, data: T): Promise<T|string|null> =
         resolve(error);
       } else {
         resolve('Unknown error');
+      }
+    };
+  });
+};
+
+
+export const getStoreData = <T>(storeName: string): Promise<T[]> => {
+  return new Promise((resolve) => {
+    request = indexedDB.open('Integrations');
+
+    request.onsuccess = (event) => {
+      db = (event.target as IDBOpenDBRequest).result;
+      const tx = db.transaction(storeName, 'readonly');
+      const store = tx.objectStore(storeName);
+      const res = store.getAll();
+      res.onsuccess = (event) => {
+        console.log(res.result)
+        resolve(res.result);
+      };
+      res.onerror = () => {
+        console.log("An error occurred")
       }
     };
   });
