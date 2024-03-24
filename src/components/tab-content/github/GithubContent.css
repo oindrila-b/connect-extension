@@ -18,13 +18,13 @@
     border-radius: 2em;
 }
 
-.repo, .starred {
+.repo, .starred, .commits {
     background-color: rgb(116, 116, 116);
     color:white ;
 }
 
 .entity-content {
-    margin-left: 5em;
+    margin-left: 1.5em;
 }
 
 
@@ -32,7 +32,7 @@
     width: 80%;
     height: max-content;
     background-color:rgb(187, 187, 187);
-    margin: 0.8em;
+    margin: 1em;
     padding: 1em;
     border-radius: 1em;
     text-align: center;
@@ -42,4 +42,23 @@
 
 .loading {
 padding: 2em;
+}
+
+.c-repo-name {
+    margin: 2em;
+}
+
+
+input {
+    padding: 0.5em;
+    border-radius: 1em;
+}
+
+.commit-buttton{
+    width: 25%;
+    background-color: rgb(116, 116, 116) ;
+    margin: 1em;
+    padding: 0.6em;
+    border-radius: 1em;
+    color: white;
 }

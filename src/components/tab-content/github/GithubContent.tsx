@@ -4,6 +4,7 @@ import { GithubRepo } from '../asset/models/GithubRepoModel'
 import { Stores, addData } from '../../../initDB'
 import Nango from '@nangohq/frontend'
 import GithubTabContent from './GithubTabContent'
+import GithubCommit from './GithubCommit'
 
 const GithubContent = () => {
   
@@ -45,6 +46,7 @@ const handleActive = (index: number) => {
        <div className="bloc-tabs">
           <button className={active  === 1 ? 'g-entity repo' : 'g-entity'} onClick={() => handleActive(1)}>Repositories</button>
           <button className={active  === 2 ? 'g-entity starred' : 'g-entity'} onClick={() => handleActive(2)}>Starred Repositories</button>
+          <button className={active  === 3 ? 'g-entity commits' : 'g-entity'} onClick={() => handleActive(3)}>Commits</button>
         </div>
         <div className="entity-content">
         {active === 1 ? <div className="repo-content">
@@ -52,6 +54,9 @@ const handleActive = (index: number) => {
           </div> : null}
           {active === 2 ? <div className="starred-content">
             <GithubTabContent repository={githubStarred} storage={Stores.GithubStarred} />
+          </div> : null}
+          {active === 3 ? <div className="commited-content">
+            <GithubCommit />
           </div> : null}
         </div>  
        </div>
