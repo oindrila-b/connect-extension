@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import Tabs from './components/tabs/Tabs';
-import { initDB } from './components/db/initDB';
+import { initDB } from './initDB';
 
 
 function App() {

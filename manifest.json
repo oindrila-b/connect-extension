@@ -10,5 +10,12 @@
     },
     "icons":{
         "512":"C.png"
-    }
+    },
+    "permissions":["activeTabs", "storage"],
+    "content_scripts": [
+        {
+            "matches":  ["add the domains of the webpages where content script needs to run"],
+            "js": ["index.js"]
+        }
+    ]
 }

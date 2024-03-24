@@ -10,5 +10,7 @@
     },
     "icons":{
         "512":"C.png"
-    }
+    },
+    "permissions":["storage"]
+
 }

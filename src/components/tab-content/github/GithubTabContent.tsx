@@ -1,13 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { GithubRepo } from '../asset/models/GithubRepoModel'
-import { addData, Stores } from '../../db/initDB'
+import { addData, getStoreData, Stores } from '../../../initDB'
 import { GithubContentItem } from '../asset/github-content/GithubContentItem'
 
-const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}, storage: {storage: Stores}) => {
+const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}) => {
 
   const [active, setActive] =  useState(1)
+  const [res, setRes] = useState<any[]>([])
+
+  const fetchDBData = async() => {
+    const data = await getStoreData(repos.storage);
+    console.log(JSON.stringify(data))
+    setRes(data)
+  }
  
+
   const handleActive = (index: number) => {
+    if(index === 1) {
+      fetchDBData()
+    }
     setActive(index)
   }
   
@@ -20,7 +31,14 @@ const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}, s
         </div>
         <div className="tab-content">
           {active === 1 ? 
-          <div> DATABASE</div>: null
+          <div> 
+            {
+              res.map((repo) => {
+                console.log(repo.name)
+                return <GithubContentItem key={repo.id} _id={repo.is} _name={repo.name} _url={repo.url} />
+              })
+            }
+          </div>: null
         }
         {active === 2 ?
         <>
@@ -30,7 +48,7 @@ const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}, s
                 const id = repo._id;
                 const name = repo._name;
                 const url = repo._url;
-                addData(storage.storage, {name, url, id})
+                addData(repos.storage, {name, url, id})
               return <GithubContentItem key={repo._id} _name={repo._name} _url={repo._url} _id={repo._id} />
               })}
             </div>
