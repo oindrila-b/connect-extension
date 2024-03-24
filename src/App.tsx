@@ -40,6 +40,7 @@ function App() {
       .auth(githubId, githubConnection)
       .then((result) => {
         console.log(result)
+        alert("Github Login successful")
       })
       .catch((error) => {
           // Handle failure.
@@ -54,6 +55,7 @@ function App() {
     .auth(jiraId, jiraConnection)
     .then((result) => {
       console.log(result)
+      alert("Jira Login successful")
     })
     .catch((error) => {
         // Handle failure.
