@@ -5,7 +5,7 @@ import { GithubContentItem } from '../asset/github-content/GithubContentItem'
 
 const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}) => {
 
-  const [active, setActive] =  useState(1)
+  const [active, setActive] =  useState(0)
   const [res, setRes] = useState<any[]>([])
 
   const fetchDBData = async() => {
@@ -13,6 +13,8 @@ const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}) =
     console.log(JSON.stringify(data))
     setRes(data)
   }
+
+  
  
 
   const handleActive = (index: number) => {
