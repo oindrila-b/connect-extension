@@ -4,7 +4,7 @@ let version = 1;
 const indexedDB = window.indexedDB;
 
 export enum Stores {
-  Integration = 'integration',
+  Commit = 'commit',
   GithubRepositories = 'github-repo',
   GithubStarred = 'github-starred',
   JiraIssue = 'jira-issue',
@@ -20,9 +20,9 @@ export const initDB = (): Promise<boolean> => {
       db =  (event.target as IDBOpenDBRequest).result;
 
       // if the data object store doesn't exist, create it
-      if (!db.objectStoreNames.contains(Stores.Integration)) {
-        console.log('Creating Integrations store');
-        db.createObjectStore(Stores.Integration, { keyPath: 'id', autoIncrement: true });
+      if (!db.objectStoreNames.contains(Stores.Commit)) {
+        console.log('Creating Commit store');
+        db.createObjectStore(Stores.Commit, { keyPath: 'id', autoIncrement: true });
       }
 
       if (!db.objectStoreNames.contains(Stores.GithubRepositories)) {
@@ -106,3 +106,50 @@ export const getStoreData = <T>(storeName: string): Promise<T[]> => {
     };
   });
 };
+
+
+export const addDataToCommitDB = <T>(data: T): Promise<T|string|null> => {
+  return new Promise((resolve) => {
+    request = indexedDB.open('Integrations', version);
+
+    request.onsuccess = (event) => {
+      console.log('request.onsuccess - addData', data);
+      db = (event.target as IDBOpenDBRequest).result;
+      console.log(Stores.Commit)
+      const tx = db.transaction(Stores.Commit, 'readwrite');
+      const store = tx.objectStore(Stores.Commit);
+      store.add(data);
+      resolve(data);
+    };
+
+    request.onerror = () => {
+      const error = request.error?.message
+      if (error) {
+        resolve(error);
+      } else {
+        resolve('Unknown error');
+      }
+    };
+  });
+};
+
+export const deleteAllDataFromStore = (storeName: string): Promise<boolean> => {
+  return new Promise((resolve) => {
+    request = indexedDB.open('Integrations', version);
+
+    request.onsuccess = (event) => {
+      console.log('request.onsuccess - deleteData from ', storeName);
+      db = (event.target as IDBOpenDBRequest).result;
+      console.log(storeName)
+      const tx = db.transaction(storeName, 'readwrite');
+      const store = tx.objectStore(storeName);
+      store.clear()
+      resolve(true);
+    };
+
+    request.onerror = () => {
+      const error = request.error?.message
+      resolve(false);
+    };
+  })
+}
