@@ -9,29 +9,12 @@ const GithubContent = () => {
   
 
   const baseURL = 'http://127.0.0.1:5000/list/github'
-  const publicKey = '29db32df-f083-48b3-b3d6-f01945876492'
-
-  let nango: Nango;
-  const githubId = 'github-2'
-  const githubConnection = 'test_ob'
+  
 
   const [githubRepositories, setGithubRepositories] = useState<GithubRepo[]>([])
   const [githubStarred, setGithubStarred] = useState<GithubRepo[]>([])
   const [active, setActive] =  useState(1)
 
-
-  const handleGithubLogIn = async() => {
-    await nango
-      .auth(githubId, githubConnection)
-      .then((result) => {
-        console.log(result)
-      })
-      .catch((error) => {
-          // Handle failure.
-          console.log("Failed to Login")
-      });
-    
-  }
 
   const fetchRepoData = async() => {
     const response = await fetch(`${baseURL}/repository`)
@@ -48,8 +31,6 @@ const GithubContent = () => {
   }
 
   useEffect(() => {
-    nango = new Nango({ publicKey: publicKey })
-    console.log("done")
     fetchRepoData()
     fetchStarredRepoData()
   },[])

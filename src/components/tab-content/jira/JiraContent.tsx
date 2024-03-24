@@ -10,30 +10,12 @@ import JiraProjectTab from './JiraProjectTab'
 
 const JiraContent = () => {
 
-  let nango:Nango;
-  const jiraId='jira-1'
-  const jiraConnection='test-connection-id'
-  const publicKey = '29db32df-f083-48b3-b3d6-f01945876492'
-
   const [active, setActive] =  useState(1)
   const [subTab, seSubTab] = useState(1)
   
   const baseURL = 'http://127.0.0.1:5000/list/jira'
   const [jiraIssues, setJiraIssues] = useState<JiraIssueModel[]>([])
   const [jiraProjects, setJiraProjects] = useState<JiraProjectModel[]>([])
-
-
-  const handleJiraLogIn = async() => {
-    await nango
-    .auth(jiraId, jiraConnection)
-    .then((result) => {
-      console.log(result)
-    })
-    .catch((error) => {
-        // Handle failure.
-        console.log("Failed to Login")
-    });
-  }
 
 
   const fetchIssue = async() => {
@@ -51,7 +33,6 @@ const JiraContent = () => {
   }
 
   useEffect(() => {
-    nango = new Nango({publicKey: publicKey})
     fetchIssue()
     fetchProjects()
   },[])

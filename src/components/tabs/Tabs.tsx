@@ -2,14 +2,10 @@ import React, { useEffect, useState } from 'react'
 import './Tabs.css'
 import GithubContent from '../tab-content/github/GithubContent'
 import JiraContent from '../tab-content/jira/JiraContent'
-import Nango from '@nangohq/frontend'
 
 
 const Tabs = () => {
-
-
-const [active, setActive] =  useState(1)
-
+ const [active, setActive] =  useState(1)
 
 const handleActive = (index: number) => {
   setActive(index)
