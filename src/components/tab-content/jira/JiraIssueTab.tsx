@@ -5,7 +5,7 @@ import { JiraIssueContent } from '../asset/jira-content/JiraIssueContent';
 
 const JiraIssueTab = (issue: { issue: JiraIssueModel[], storage: Stores }) => {
 
-    const [active, setActive] = useState(0)
+    const [active, setActive] = useState(2)
     const [res, setRes] = useState<any[]>([])
 
     const fetchDBData = async () => {

@@ -7,7 +7,7 @@ import { JiraProjectContent } from '../asset/jira-content/JiraProjectContent';
 
 const JiraProjectTab = (project: { project: JiraProjectModel[], storage: Stores }) => {
 
-    const [active, setActive] = useState(0)
+    const [active, setActive] = useState(2)
     const [res, setRes] = useState<any[]>([])
 
 

@@ -5,7 +5,7 @@ import { GithubContentItem } from '../asset/github-content/GithubContentItem'
 
 const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}) => {
 
-  const [active, setActive] =  useState(0)
+  const [active, setActive] =  useState(2)
   const [res, setRes] = useState<any[]>([])
 
   const fetchDBData = async() => {
@@ -37,7 +37,7 @@ const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}) =
             {
               res.map((repo) => {
                 console.log(repo.name)
-                return <GithubContentItem key={repo.id} _id={repo.is} _name={repo.name} _url={repo.url} />
+                return <GithubContentItem key={repo.id} _id={repo.is} _name={repo.name} _url={repo.url} _owner={repo.owner}/>
               })
             }
           </div>: null
@@ -50,8 +50,9 @@ const GithubTabContent = (repos : {repository: GithubRepo[], storage: Stores}) =
                 const id = repo._id;
                 const name = repo._name;
                 const url = repo._url;
-                addData(repos.storage, {name, url, id})
-              return <GithubContentItem key={repo._id} _name={repo._name} _url={repo._url} _id={repo._id} />
+                const owner = repo._owner;
+                addData(repos.storage, {name, url, owner, id})
+              return <GithubContentItem key={repo._id} _name={repo._name} _url={repo._url} _id={repo._id} _owner={repo._owner}/>
               })}
             </div>
             : 
