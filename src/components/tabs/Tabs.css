@@ -66,13 +66,14 @@ a {
 
 
 .login-button {
-    width: 100%;
+    width: 60%;
     height: 100%;
     margin: 1em ;
     border-radius: 1em;
     color: white;
     justify-content: center;
     display: flex;
+    cursor: pointer;
 }
 
 .github-lg {

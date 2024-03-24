@@ -58,10 +58,10 @@ const JiraProjectTab = (project: { project: JiraProjectModel[], storage: Stores 
                                         const key = repo._key;
                                         const url = repo._url;
                                         const name = repo._name;
-                                        const lastModififed = repo._last_modified;
+                                        const lastModified = repo._last_modified;
                                         const numberOfIssues = repo._number_of_issues;
 
-                                         addData(project.storage, { id, key, url, name, lastModififed, numberOfIssues })
+                                         addData(project.storage, { id, key, url, name, lastModified, numberOfIssues })
                                         return <JiraProjectContent
                                         key={repo._id}
                                          _id={repo._id} 
