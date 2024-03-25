@@ -19,7 +19,6 @@ function App() {
 
   const [githubLogin, setGithubLogin] = useState(false)
   const [jiraLogin, setjiraLogin] = useState(false)
-  const [hasLoggedIn, setHasLoggedIn] = useState(false)
 
   useEffect(() => {
     handleDBInitialisation()
