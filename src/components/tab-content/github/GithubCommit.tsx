@@ -5,7 +5,7 @@ import { Stores, addDataToCommitDB, deleteAllDataFromStore, getStoreData } from 
 
 const GithubCommit = () => {
 
-    const COMMIT_ENDPOINT_URL = `http://localhost:5000/commits/`;
+    const COMMIT_ENDPOINT_URL = `https://external-access-server.onrender.com/commits/`;
 
     const [repositoryName, setRepositoryName] = useState("")
     const [commitData, setCommitData] = useState<GithubCommitModel[]>([])

@@ -9,7 +9,7 @@ import GithubCommit from './GithubCommit'
 const GithubContent = () => {
   
 
-  const baseURL = 'http://127.0.0.1:5000/list/github'
+  const baseURL = 'https://external-access-server.onrender.com/list/github'
   
 
   const [githubRepositories, setGithubRepositories] = useState<GithubRepo[]>([])

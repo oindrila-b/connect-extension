@@ -13,7 +13,7 @@ const JiraContent = () => {
   const [active, setActive] =  useState(1)
   const [subTab, seSubTab] = useState(1)
   
-  const baseURL = 'http://127.0.0.1:5000/list/jira'
+  const baseURL = 'https://external-access-server.onrender.com/list/jira'
   const [jiraIssues, setJiraIssues] = useState<JiraIssueModel[]>([])
   const [jiraProjects, setJiraProjects] = useState<JiraProjectModel[]>([])
 
